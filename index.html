@@ -1,0 +1,124 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Cuentas</title>
+    <link rel="stylesheet" href="styles/pico.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="src/script.js"></script>
+</head>
+
+<dialog id="openSessionDialog" open>
+    <article>
+        <header>
+            Iniciar Sesión
+        </header>
+
+        <p id="error" style="color: crimson;"></p>
+        <label for="user">
+            Usuario:
+            <input type="text" id="user" placeholder="usuario" required>
+        </label>
+        <label for="passw">
+            Contraseña:
+            <input type="password" id="pass" placeholder="contraseña" required>
+        </label>
+        <button style="margin-bottom: 0%;" id="openSession" type="submit">Iniciar Sesión</button>
+
+    </article>
+</dialog>
+
+<body>
+    <div>
+
+        <head>
+            <nav style="background-color: #1e2b35;padding-left: 1dvi;padding-right: 1dvi;margin-bottom: 5dvi;">
+                <ul>
+                    <li><a href="#" class="primary">Opciones</a></li>
+                </ul>
+                <ul>
+                    <li><strong>Mis Cuentas</strong></li>
+                </ul>
+                <ul>
+                    <li><a href="#" class="secondary">...</a></li>
+                </ul>
+            </nav>
+        </head>
+    </div>
+
+    <details style="margin-left: 10dvi; margin-right: 10dvi;">
+        <summary>Agregar Registro</summary>
+        <article>
+            <label for="detail">
+                Detalle:
+                <input id="detail" type="text" placeholder="Detalle">
+            </label>
+            <label for="bank">
+                Banco:
+                <select id="bank">
+                    <option value="Mercado Pago">Mercado Pago</option>
+                    <option value="Personal Pay">Personal Pay</option>
+                    <option value="Efectivo" selected>Efectivo</option>
+                    <option value="Billetera Santa Fe">Billetera Santa Fe</option>
+                    <option value="Banco Nación">Banco Nación</option>
+                    <option value="Banco Galicia">Banco Galicia</option>
+                </select>
+            </label>
+            <label for="category">
+                Categoría
+                <select id="category" value="food">
+                    <option id="taxes" value="Impuestos">Impuestos</option>
+                    <option id="food" value="Comida"selected>Comida</option>
+                    <option id="services" value="Servicios">Servicios</option>
+                    <option id="fixed" value="Gastos Fijos">Gastos Fijos</option>
+                    <option id="sports" value="Deporte">Deporte</option>
+                    <option id="salary" value="Sueldo">Sueldo</option>
+                    <option id="education" value="Educación">Educación</option>
+                    <option id="gift" value="Regalos">Regalos</option>
+                    <option id="cloth" value="Ropa">Ropa</option>
+                    <option id="other" value="Otro">Otro</option>
+                </select>
+            </label>
+            <label for="type">
+                Tipo:
+                <select id="type" value="out">
+                    <option value="out" selected>Egreso</option>
+                    <option value="in">Ingreso 1</option>
+                </select>
+            </label>
+            <label for="q">
+                Monto:
+                <input id="q" type="number" placeholder="Monto">
+            </label>
+            <button id="agregar" style="margin-bottom: 0;">Agregar</button>
+        </article>
+    </details>
+
+    <article style="margin-left: 10dvi; margin-right: 10dvi;">
+        <div id="selector" class="grid" style="display: flex">
+            <input id="monthSelector" style="margin-bottom: 0;" type="month">
+            <button id="goToMonth" style="margin-bottom: 0;">Ir</button>
+        </div>
+    </article>
+
+    <div id="tableContainer" style="margin: 0dvi;overflow-x: auto;">
+        <table role="grid" id="table">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Detalle</th>
+                    <th scope="col">Banco</th>
+                    <th scope="col">Rubro</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Monto</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
