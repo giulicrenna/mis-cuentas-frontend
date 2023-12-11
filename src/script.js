@@ -179,6 +179,8 @@ document.getElementById('agregar').addEventListener('click', () => {
             }
             console.log('Datos insertados correctamente');
             fetchToData(username);
+            document.getElementById('detail').value = "";
+            document.getElementById('q').value = 0;
         })
         .catch(error => {
             console.error('Error:', error);
