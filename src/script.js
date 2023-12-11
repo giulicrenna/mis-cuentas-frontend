@@ -87,7 +87,7 @@ document.getElementById("openSession").addEventListener("click", function (e) {
     if (user_ == "" || pass == "") {
         error.innerHTML = "Los campos de usuario y contraseña deben estar completos.";
         return;
-    }
+    }   
 
     // Preparar los parámetros para la solicitud GET
     const params = new URLSearchParams({
@@ -157,7 +157,7 @@ document.getElementById('agregar').addEventListener('click', () => {
 
     // Preparar los parámetros para la solicitud POST
     const params = new URLSearchParams({
-        user_id: 1,
+        user_id: user_id,
         day: day,
         month: month,
         year: year,
@@ -178,7 +178,7 @@ document.getElementById('agregar').addEventListener('click', () => {
                 throw new Error('Ocurrió un error al insertar los datos');
             }
             console.log('Datos insertados correctamente');
-            fetchToData();
+            fetchToData(username);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -191,7 +191,6 @@ document.getElementById("closeSession").addEventListener("click", function(){
 })
 
 if(username != undefined){
-    console.log(user_id);
     document.getElementById("openSessionDialog").close();
     fetchToData(username);
 }
