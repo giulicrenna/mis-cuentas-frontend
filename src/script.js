@@ -33,13 +33,13 @@ function agregarDatosATabla(datos) {
     });
 }
 
-function fetchToData() {
+function fetchToData(uname) {
     var dateString = document.getElementById('monthSelector').value;
     var dateParts = dateString.split("-"); // Dividir la cadena en partes usando el separador "-"
     var year = parseInt(dateParts[0]); // Obtener el año
     var month = parseInt(dateParts[1]); // Obtener el mes
 
-    const url = `https://mis-cuentas-api.crennaanalytica.com.ar/data?user=${user_id}&month=${month}&year=${year}`;
+    const url = `https://mis-cuentas-api.crennaanalytica.com.ar/data?user=${uname}&month=${month}&year=${year}`;
 
     // Realizar la solicitud GET utilizando fetch
     fetch(url)
@@ -80,20 +80,18 @@ function fetchToData() {
 document.getElementById("openSession").addEventListener("click", function (e) {
     e.preventDefault();
     var dialog = document.getElementById("openSessionDialog");
-    const user = document.getElementById('user').value;
+    const user_ = document.getElementById('user').value;
     const password = document.getElementById('pass').value;
     var error = document.getElementById("error");
 
-    if (user == "" || pass == "") {
-        error.innerHTML = "Los campos de usuario y contraseña deben estar completos."
-    }
-    else if (!regex.test(user.value)) {
-        error.innerHTML = "Mail inválido"
+    if (user_ == "" || pass == "") {
+        error.innerHTML = "Los campos de usuario y contraseña deben estar completos.";
+        return;
     }
 
     // Preparar los parámetros para la solicitud GET
     const params = new URLSearchParams({
-        mail: user,
+        mail: user_,
         password: password
     });
 
@@ -109,13 +107,16 @@ document.getElementById("openSession").addEventListener("click", function (e) {
             return response.json();
         })
         .then(data => {
-            var id = data.response[0].id;
-            var username = data.response[0].username;
+            var id_ = data.response[0].id;
+            var username_ = data.response[0].username;
 
-            if(id != undefined){
-                localStorage.setItem("user_id", id);
-                localStorage.setItem("username", username);
+            if(id_ != undefined){
+                localStorage.setItem("user_id", id_);
+                localStorage.setItem("username", username_);
                 dialog.close()
+                fetchToData(username_);
+            }else{
+                error.innerHTML = 'Credenciales inválidas';
             }
             
         })
@@ -184,8 +185,13 @@ document.getElementById('agregar').addEventListener('click', () => {
         });
 });
 
-if(user_id != undefined){
+document.getElementById("closeSession").addEventListener("click", function(){
+    localStorage.clear();
+    location.reload();
+})
+
+if(username != undefined){
     console.log(user_id);
     document.getElementById("openSessionDialog").close();
-    fetchToData();
+    fetchToData(username);
 }
